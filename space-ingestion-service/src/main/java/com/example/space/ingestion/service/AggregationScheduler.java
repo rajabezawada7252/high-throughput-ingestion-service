@@ -1,7 +1,8 @@
 package com.example.space.ingestion.service;
 
-import com.example.space.ingestion.model.MinuteStats;
-import com.example.space.ingestion.repository.MinuteStatsRepository;
+import com.example.space.ingestion.primarymodel.MinuteStats;
+import com.example.space.ingestion.primaryrepository.MinuteStatsRepository;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

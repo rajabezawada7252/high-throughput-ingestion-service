@@ -1,9 +1,16 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
+    primary:
+      url: jdbc:h2:mem:primarydb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
+
+    secondary:
+      url: jdbc:h2:mem:secondarydb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
 
   jpa:
     hibernate:
@@ -19,3 +26,33 @@ spring:
     redis:
       host: localhost
       port: 6379
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      externalService:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        
+        
+management:
+          endpoints:
+            web:
+              exposure:
+                include: "*"
+          endpoint:
+            health:
+              show-details: always        
+      
+              
+              spring:
+                kafka:
+                  bootstrap-servers: localhost:9092
+                  consumer:
+                    group-id: space-group
+                    auto-offset-reset: earliest
+                  producer:
+                    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+                    value-serializer: org.apache.kafka.common.serialization.StringSerializer

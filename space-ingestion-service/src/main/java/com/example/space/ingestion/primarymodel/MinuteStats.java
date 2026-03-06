@@ -1,4 +1,4 @@
-package com.example.space.ingestion.model;
+package com.example.space.ingestion.primarymodel;
 
 import jakarta.persistence.*;
 import java.time.Instant;
